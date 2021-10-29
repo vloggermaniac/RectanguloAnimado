@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MisionJS2</title>
+</head>
+
+<body>
+    <canvas id="canvas" width="400" height="400"></canvas>
+    <p id="lya"></p>
+
+    <script src="https://code.jquery.com/jquery-2.1.0.js"></script>
+    <script>
+    
+   var canvas=document.getElementById("canvas");
+   var ctx=canvas.getContext("2d");
+
+    var posicion=0;  
+    var alto=400;
+    var largo=0;
+    var color= ["Red", "Blue", "Yellow", "Purple", "lightBlue"];
+    var numeroAzar = function(valor) {
+        return Math.floor(Math.random()* valor);
+      };
+
+    setInterval(function(){
+        ctx.clearRect(0, 0, 400, 400);
+        ctx.fillRect(posicion, 0, largo, alto);
+        
+        posicion++;
+       largo++;
+       alto--;
+        
+        if (posicion>400){
+            posicion=0;
+            largo=1;
+            alto=400;
+            ctx.fillStyle = color[numeroAzar(color.length)];
+        }
+    }, 30);
+
+    $("#canvas").click(function(){
+        ctx.fillStyle=color[numeroAzar(color.length)];
+        $("#lya").text("largo = " + largo + " alto = " + alto);
+    });
+   </script>
+</body>
+</html>
